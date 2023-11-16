@@ -45,9 +45,9 @@ Siga as intruções do guia de início rápido da API do [Google Calendar](https
 
 ## Referências
 [Python](https://docs.python.org/3.11/tutorial/index.html)  
-[Google Calendar](https://developers.google.com/calendar/api/quickstart/python?hl=pt-br)  
 [Discord.py](https://discordpy.readthedocs.io/en/stable/)  
 [Discord](https://discord.com/developers/docs/intro)  
+[Google Calendar](https://developers.google.com/calendar/api/quickstart/python?hl=pt-br)  
 [WeatherAPI](https://www.weatherapi.com/docs/)  
 [QuickChart](https://quickchart.io/documentation/)  
 
