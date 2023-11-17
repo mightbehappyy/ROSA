@@ -15,7 +15,9 @@
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
 
+
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com)
+[![wakatime](https://wakatime.com/badge/user/018bb0d6-56a3-43d5-85d1-e7b7401fdda3/project/018bbbaa-9b31-475a-ad1b-16c6c04441fe.svg)](https://wakatime.com/badge/user/018bb0d6-56a3-43d5-85d1-e7b7401fdda3/project/018bbbaa-9b31-475a-ad1b-16c6c04441fe)
 
 
 ROSA é um bot para a plataforma Discord criada com o objetivo de facilitar a vida dos monitores dos laboratórios de computação do Campus UPE Garanhuns em suas reservas. 
