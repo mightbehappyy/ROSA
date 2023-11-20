@@ -56,6 +56,7 @@ Siga as intruções do guia de início rápido da API do [Google Calendar](https
 ## Histórico de Mudanças
 
 - #### 0.1 ADD: Checagem de reserva adicionada
+- #### 0.2 ADD: Reserva de Labs adicionada
 
 ## Autores
 - [mightbehappyy](https://github.com/mightbehappyy)
