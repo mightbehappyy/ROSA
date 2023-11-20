@@ -68,14 +68,14 @@ class CalendarService:
         return events_by_day
 
     def check_for_overlapping_events(self, date, start, end):
-        start_time = f"{date}T{start}:00"
-        end_time = f"{date}T{end}:00"
+        start_time = f"{date}T{start}:00-03:00"
+        end_time = f"{date}T{end}:00-03:00"
+        print(start_time, end_time)
         events_result = (
             self.service.events()
             .list(
                 calendarId="primary",
-                timeMin=start_time + "Z",
-                timeMax=end_time + "Z",
+                timeMin=start_time,
                 singleEvents=True,
                 orderBy="startTime",
             )
@@ -86,28 +86,34 @@ class CalendarService:
         if not events:
             return False
         else:
-            return True
+            for event in events:
+                start = event["start"].get("dateTime", event["start"].get("date"))
+
+                if start < end_time:
+                    return True
+                else:
+                    return False
 
     def post_event(self, summary, start, end, date):
-        start_time = f"{date}T{start}:00"
-        end_time = f"{date}T{end}:00"
-        print(f"Posting event between {start_time} and {end_time}")
-        event = {
-            "summary": summary,
-            "start": {
-                "dateTime": start_time,
-                "timeZone": "America/Recife",
-            },
-            "end": {
-                "dateTime": end_time,
-                "timeZone": "America/Recife",
-            },
-        }
-
         try:
+            start_time = f"{date}T{start}:00"
+            end_time = f"{date}T{end}:00"
+            event = {
+                "summary": summary,
+                "start": {
+                    "dateTime": start_time,
+                    "timeZone": "America/Recife",
+                },
+                "end": {
+                    "dateTime": end_time,
+                    "timeZone": "America/Recife",
+                },
+            }
+
             event = (
                 self.service.events().insert(calendarId="primary", body=event).execute()
             )
+            return True
 
         except Exception as e:
             print(f"An error has occurred on post_event: {e}")

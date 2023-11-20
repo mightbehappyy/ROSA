@@ -44,7 +44,10 @@ def post_event(summary, start, end, date):
         if calendar_service.check_for_overlapping_events(date, start, end):
             return True
         else:
-            calendar_service.post_event(summary, start, end, date)
-            return False
-    except HttpError as error:
-        print(f"An error occurred: {error}")
+            if calendar_service.post_event(summary, start, end, date):
+                return False
+            else:
+                return None
+
+    except Exception as e:
+        print(f"An error occurred on post event calendar api: {e}")
