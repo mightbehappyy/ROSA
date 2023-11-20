@@ -36,7 +36,6 @@ Apesar de seu propósito inicial, ROSA é um bot multiuso, e planejamos implemen
 | `/graficotempo  [cidade]`  | Retorna um gráfico com a progressão da temperatura, umidade e sensação termica durante o dia  |
 | `/d20` | Rola um dado de 20 lados |
 | `/deletar [numero de mensagens]` | Para deletar mensagens quando o chat ficar muito poluído|
-
 | `/oi` | ROSA se apresenta 😎|
 
 
