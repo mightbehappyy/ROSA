@@ -2,6 +2,7 @@ import discord
 import traceback
 from datetime import datetime
 from CalendarAPI import post_event
+from embebs.confirmation_embed import ConfirmationEmbed
 
 
 class ReservationModal(discord.ui.Modal, title="Reserva"):
@@ -40,12 +41,12 @@ class ReservationModal(discord.ui.Modal, title="Reserva"):
     )
 
     async def on_submit(self, interaction: discord.Interaction):
+        embed_object = ConfirmationEmbed()
         motivation_value = self.motivation.value
         name_value = self.name.value
         date_value = self.date.value
         start_time_value = self.start_time.value
         ending_time_value = self.ending_time.value
-
         try:
             date_obj = datetime.strptime(date_value, "%d-%m-%Y")
             formatted_date = date_obj.strftime("%Y-%m-%d")
@@ -69,18 +70,31 @@ class ReservationModal(discord.ui.Modal, title="Reserva"):
             event = post_event(
                 motivation_value, start_time_value, ending_time_value, formatted_date
             )
-            print(event)
+
             if event == True:
                 await interaction.response.send_message(
                     "Já existe uma reserva para esse horário :cry:", ephemeral=True
                 )
                 return
-            else:
+            elif event == False:
                 user = await interaction.client.fetch_user(interaction.user.id)
-            await user.send(
-                f"Reserva enviada com sucesso :white_check_mark:\n\nMotivação: {motivation_value}\nNome: {name_value}\nData: {date_value}\nHorário: {start_time_value} - {ending_time_value}"
-            )
-
+                await interaction.response.send_message(
+                    f"<@{user.id}> Reserva enviada com sucesso! Veja a confirmação na sua DM :white_check_mark:"
+                )
+                embed = embed_object.send_confirmation_embed(
+                    motivation_value,
+                    start_time_value,
+                    ending_time_value,
+                    formatted_date,
+                    name_value,
+                )
+                await user.send(embed=embed)
+            else:
+                await interaction.response.send_message(
+                    "Ocorreu um erro ao enviar a reserva :cry:",
+                    ephemeral=True,
+                )
+                return
         except Exception as e:
             await interaction.response.send_message(
                 "Ocorreu um erro ao enviar a reserva :cry:",
