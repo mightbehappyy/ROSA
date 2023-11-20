@@ -24,7 +24,8 @@ class CalendarService:
 
         start_of_week = now - timedelta(days=now.weekday())
         end_of_week = start_of_week + timedelta(days=6)
-
+        print(start_of_week.isoformat() + "Z")
+        print(end_of_week.isoformat() + "Z")
         events_result = (
             self.service.events()
             .list(
@@ -66,9 +67,31 @@ class CalendarService:
             )
         return events_by_day
 
+    def check_for_overlapping_events(self, date, start, end):
+        start_time = f"{date}T{start}:00"
+        end_time = f"{date}T{end}:00"
+        events_result = (
+            self.service.events()
+            .list(
+                calendarId="primary",
+                timeMin=start_time + "Z",
+                timeMax=end_time + "Z",
+                singleEvents=True,
+                orderBy="startTime",
+            )
+            .execute()
+        )
+
+        events = events_result.get("items", [])
+        if not events:
+            return False
+        else:
+            return True
+
     def post_event(self, summary, start, end, date):
         start_time = f"{date}T{start}:00"
         end_time = f"{date}T{end}:00"
+        print(f"Posting event between {start_time} and {end_time}")
         event = {
             "summary": summary,
             "start": {
@@ -80,14 +103,12 @@ class CalendarService:
                 "timeZone": "America/Recife",
             },
         }
+
         try:
             event = (
                 self.service.events().insert(calendarId="primary", body=event).execute()
             )
 
-            if event.get("status") == "confirmed":
-                print("posted")
-            else:
-                return print(f"Unexpected response: {event}")
         except Exception as e:
-            print(f"An error has occurred: {e}")
+            print(f"An error has occurred on post_event: {e}")
+            return False

@@ -24,10 +24,10 @@ class ReservationEmbeds:
                 f'{event.get("start_hour", "")} - {event.get("end_hour", "")}'
             )
             summary = event.get("summary", "")
-            event_strings.append("\n")
             event_strings.append(
-                f"\nReserva para: {summary} \n Horário: {scheduled_time}"
+                f"\nReserva para: {summary}\nHorário: {scheduled_time}"
             )
+            event_strings.append("\n")
 
         return " ".join(event_strings)
 
@@ -53,10 +53,10 @@ class ReservationEmbeds:
 
                 embed.add_field(
                     name=f"{(day)}",
-                    value=self.get_day_events(day_data[dates[0]])
+                    value=f"```{self.get_day_events(day_data[dates[0]])}```"
                     if dates
                     else "No events",
-                    inline=True,
+                    inline=False,
                 )
             embed.add_field(name="", value="", inline=True)
 

@@ -1,7 +1,6 @@
 from discord.ext import commands
 import discord
 from discord import app_commands
-from modals.feedback import Feedback
 from GraphAPI import get_weather_graph, get_weather_stats
 from embebs.weather_graph_embed import WeatherEmbeds
 from settings import GUILD_ID
