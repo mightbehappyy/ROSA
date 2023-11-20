@@ -29,7 +29,10 @@ class Reservations(commands.Cog):
     async def reserva(
         self, interaction: discord.Interaction, lab: discord.app_commands.Choice[int]
     ):
-        await interaction.response.send_modal(ReservationModal())
+        try:
+            await interaction.response.send_modal(ReservationModal())
+        except Exception as e:
+            print(e)
 
     @app_commands.command(
         name="checar_reserva", description="Checa o calendário para futuros eventos"

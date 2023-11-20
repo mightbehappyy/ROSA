@@ -30,12 +30,12 @@ Apesar de seu propósito inicial, ROSA é um bot multiuso, e planejamos implemen
 | Comandos       | Descrição |
 | -------------  | ------------- |
 | `/checar_reserva [lab]`| Mostra as reservas para semana do laboratório escolhido (Windows ou Linux) |
+| `/reservar [lab]`  | Serve para os professores reservarem suas aulas preenchendo um forms/modal |
 | `/ppc` | Envia o link do projeto pedagógico de curso de graduação de Engenharia de Software do Campus Garanhuns|
 | `/tempo [cidade]`| Retorna algumas informações do clima da cidade escolhida |
 | `/graficotempo  [cidade]`  | Retorna um gráfico com a progressão da temperatura, umidade e sensação termica durante o dia  |
 | `/d20` | Rola um dado de 20 lados |
 | `/deletar [numero de mensagens]` | Para deletar mensagens quando o chat ficar muito poluído|
-| `/reservar [lab]` 🚧 | Serve para os professores reservarem suas aulas preenchendo um forms/modal (Ainda em desenvolvimento) |
 | `/oi` | ROSA se apresenta 😎|
 
 
@@ -56,6 +56,7 @@ Siga as intruções do guia de início rápido da API do [Google Calendar](https
 ## Histórico de Mudanças
 
 - #### 0.1 ADD: Checagem de reserva adicionada
+- #### 0.2 ADD: Reserva de Labs adicionada
 
 ## Autores
 - [mightbehappyy](https://github.com/mightbehappyy)
