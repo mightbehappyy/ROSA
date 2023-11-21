@@ -1,30 +1,32 @@
 import os.path
 from google.auth.transport.requests import Request
-from google.oauth2.credentials import Credentials
-from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.errors import HttpError
 import apis.CalendarService as CalendarService
+from google.oauth2 import service_account
+from dotenv import load_dotenv
 
 # If modifying these scopes, delete the file token.json.
 SCOPES = ["https://www.googleapis.com/auth/calendar"]
 
+load_dotenv()
+
 
 def get_creds():
     creds = None
-    token = "token.json"
+    creds_file_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
 
-    if os.path.exists(token):
-        creds = Credentials.from_authorized_user_file(token, SCOPES)
+    if os.path.exists(creds_file_path):
+        creds = service_account.Credentials.from_service_account_file(
+            creds_file_path, scopes=SCOPES
+        )
 
     if not creds or not creds.valid:
-        if creds and creds.expired and creds.refresh_token:
+        if creds and creds.expired:
             creds.refresh(Request())
         else:
-            flow = InstalledAppFlow.from_client_secrets_file("secret_file.json", SCOPES)
-            creds = flow.run_local_server(port=0)
-
-        with open(token, "w") as token_file:
-            token_file.write(creds.to_json())
+            creds = service_account.Credentials.from_service_account_file(
+                creds_file_path, scopes=SCOPES
+            )
 
     return creds
 
