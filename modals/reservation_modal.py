@@ -1,7 +1,7 @@
 import discord
 import traceback
 from datetime import datetime
-from CalendarAPI import post_event
+from apis.CalendarAPI import post_event
 from embebs.confirmation_embed import ConfirmationEmbed
 
 

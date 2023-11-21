@@ -24,8 +24,6 @@ class CalendarService:
 
         start_of_week = now - timedelta(days=now.weekday())
         end_of_week = start_of_week + timedelta(days=6)
-        print(start_of_week.isoformat() + "Z")
-        print(end_of_week.isoformat() + "Z")
         events_result = (
             self.service.events()
             .list(
@@ -70,7 +68,6 @@ class CalendarService:
     def check_for_overlapping_events(self, date, start, end):
         start_time = f"{date}T{start}:00-03:00"
         end_time = f"{date}T{end}:00-03:00"
-        print(start_time, end_time)
         events_result = (
             self.service.events()
             .list(
