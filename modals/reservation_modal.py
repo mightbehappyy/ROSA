@@ -3,6 +3,8 @@ import traceback
 from datetime import datetime
 from apis.CalendarAPI import post_event
 from embebs.confirmation_embed import ConfirmationEmbed
+from embebs.reservation import ReservationEmbeds
+from apis.CalendarAPI import get_day_event
 
 
 class ReservationModal(discord.ui.Modal, title="Reserva"):
@@ -63,6 +65,7 @@ class ReservationModal(discord.ui.Modal, title="Reserva"):
             await interaction.response.send_message(
                 "Formato de hora inválido por favor use: Hora:Minuto.", ephemeral=True
             )
+
             print(e)
             return
 
@@ -72,9 +75,15 @@ class ReservationModal(discord.ui.Modal, title="Reserva"):
             )
 
             if event == True:
-                await interaction.response.send_message(
-                    "Já existe uma reserva para esse horário :cry:", ephemeral=True
+                embed = ReservationEmbeds()
+                result_days_embed = embed.get_day_events_embed(
+                    get_day_event(formatted_date)
                 )
+
+                await interaction.response.send_message(
+                    ephemeral=True, embed=result_days_embed
+                )
+
                 return
             elif event == False:
                 user = await interaction.client.fetch_user(interaction.user.id)
@@ -105,7 +114,7 @@ class ReservationModal(discord.ui.Modal, title="Reserva"):
         self, interaction: discord.Interaction, error: Exception
     ) -> None:
         await interaction.response.send_message(
-            "Oops! Something went wrong.", ephemeral=True
+            "Eita! alguma coisa deu errado.", ephemeral=True
         )
 
         # Make sure we know what the error actually is

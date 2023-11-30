@@ -66,3 +66,31 @@ class ReservationEmbeds:
                 title="Não há horários reservados para essa semana",
                 color=0xF03A17,
             )
+
+    def get_day_events_embed(self, events):
+        if events:
+            first_day_list_converted = list(events.items())[0][1]
+
+            first_day = list(first_day_list_converted.items())[0][0]
+
+            embed = discord.Embed(
+                title="Infelizmente já existe existe uma reserva para esse horário :cry:",
+                description=f"Aqui estão as reservas para {first_day} tente reservar para outro horário se possível :smiley:",
+                color=0xF03A17,
+            )
+
+            for day_name, day_data in events.items():
+                dates = list(day_data.keys())
+
+                day = self.translate_day(day_name)
+
+                embed.add_field(
+                    name=f"{(day)}",
+                    value=f"```{self.get_day_events(day_data[dates[0]])}```"
+                    if dates
+                    else "No events",
+                    inline=False,
+                )
+            embed.add_field(name="", value="", inline=True)
+
+            return embed

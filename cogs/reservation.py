@@ -30,7 +30,12 @@ class Reservations(commands.Cog):
         self, interaction: discord.Interaction, lab: discord.app_commands.Choice[int]
     ):
         try:
+            # if check_for_role(interaction, AUTHORIZED_ROLE_ID):
             await interaction.response.send_modal(ReservationModal())
+        # else:
+        # await interaction.response.send_message(
+        #     "Você não tem permissão para usar esse comando", ephemeral=True
+        # )
         except Exception as e:
             print(e)
 

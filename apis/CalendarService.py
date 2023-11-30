@@ -37,37 +37,13 @@ class CalendarService:
         )
 
         events = events_result.get("items", [])
-
-        if not events:
-            print("No upcoming events found for the current week.")
-            return {}
-
-        events_by_day = {}
-
-        for event in events:
-            start = event["start"].get("dateTime", event["start"].get("date"))
-            end = event["end"].get("dateTime", event["end"].get("date"))
-
-            day_name = datetime.datetime.fromisoformat(start).strftime("%A")
-            day = datetime.datetime.fromisoformat(start).strftime("%d-%m-%Y")
-
-            start_hour = datetime.datetime.fromisoformat(start).strftime("%H:%M")
-            end_hour = datetime.datetime.fromisoformat(end).strftime("%H:%M")
-
-            event_info = {
-                "start_hour": start_hour,
-                "end_hour": end_hour,
-                "summary": event["summary"],
-            }
-
-            events_by_day.setdefault(day_name, {}).setdefault(day, []).append(
-                event_info
-            )
+        events_by_day = self.format_event_info(events)
         return events_by_day
 
     def check_for_overlapping_events(self, date, start, end):
         start_time = f"{date}T{start}:00-03:00"
         end_time = f"{date}T{end}:00-03:00"
+        print("checar formatação", start_time)
         events_result = (
             self.service.events()
             .list(
@@ -115,3 +91,53 @@ class CalendarService:
         except Exception as e:
             print(f"An error has occurred on post_event: {e}")
             return False
+
+    def get_day_events(self, date):
+        print(f"{date}T00:00:00")
+        try:
+            start_time = f"{date}T00:00:00-03:00"
+            end_time = f"{date}T23:59:00-03:00"
+            events_result = (
+                self.service.events()
+                .list(
+                    calendarId="primary",
+                    timeMin=start_time,
+                    timeMax=end_time,
+                    singleEvents=True,
+                    orderBy="startTime",
+                )
+                .execute()
+            )
+            events = events_result.get("items", [])
+            day_events = self.format_event_info(events)
+            return day_events
+        except Exception as e:
+            print(f"An error occurred on get_day_events: {e}")
+
+    def format_event_info(self, events):
+        if not events:
+            print("No upcoming events found for the current week.")
+            return {}
+
+        events_by_day = {}
+
+        for event in events:
+            start = event["start"].get("dateTime", event["start"].get("date"))
+            end = event["end"].get("dateTime", event["end"].get("date"))
+
+            day_name = datetime.datetime.fromisoformat(start).strftime("%A")
+            day = datetime.datetime.fromisoformat(start).strftime("%d-%m-%Y")
+
+            start_hour = datetime.datetime.fromisoformat(start).strftime("%H:%M")
+            end_hour = datetime.datetime.fromisoformat(end).strftime("%H:%M")
+
+            event_info = {
+                "start_hour": start_hour,
+                "end_hour": end_hour,
+                "summary": event["summary"],
+            }
+
+            events_by_day.setdefault(day_name, {}).setdefault(day, []).append(
+                event_info
+            )
+        return events_by_day

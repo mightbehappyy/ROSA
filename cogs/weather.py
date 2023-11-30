@@ -37,7 +37,7 @@ class Weather(commands.Cog):
     @time.error
     @weather_graph.error
     async def on_error(self, interaction: discord.Interaction, error):
-        await interaction.response.send_message(
+        await interaction.followup.send(
             "Não consegui encontrar essa cidade. Desculpe! :cry:"
         )
 

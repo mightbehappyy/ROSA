@@ -4,7 +4,7 @@ from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.errors import HttpError
 import apis.CalendarService as CalendarService
-
+from google.oauth2 import service_account
 
 # If modifying these scopes, delete the file token.json.
 SCOPES = ["https://www.googleapis.com/auth/calendar"]
@@ -52,3 +52,10 @@ def post_event(summary, start, end, date):
 
     except Exception as e:
         print(f"An error occurred on post event calendar api: {e}")
+
+
+def get_day_event(date):
+    try:
+        return calendar_service.get_day_events(date)
+    except HttpError as error:
+        print(f"An error occurred: {error}")
