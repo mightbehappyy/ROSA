@@ -1,10 +1,10 @@
 import discord
 import traceback
 from datetime import datetime
-from apis.CalendarController import post_event
+from apis.calendar_controller import post_event
 from ui.embebs.confirmation_embed import ConfirmationEmbed
 from ui.embebs.reservation import ReservationEmbeds
-from apis.CalendarController import get_day_event
+from apis.calendar_controller import get_day_event
 
 
 class ReservationModal(discord.ui.Modal, title="Reserva"):
