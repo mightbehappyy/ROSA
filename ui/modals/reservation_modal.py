@@ -52,6 +52,7 @@ class ReservationModal(discord.ui.Modal, title="Reserva"):
         try:
             date_obj = datetime.strptime(date_value, "%d-%m-%Y")
             formatted_date = date_obj.strftime("%Y-%m-%d")
+            embed_formatted_date = date_obj.strftime("%d-%m-%Y")
         except ValueError as e:
             await interaction.response.send_message(
                 "Formato de data inválido por favor use: Dia-Mês-Ano.", ephemeral=True
@@ -94,7 +95,7 @@ class ReservationModal(discord.ui.Modal, title="Reserva"):
                     motivation_value,
                     start_time_value,
                     ending_time_value,
-                    formatted_date,
+                    embed_formatted_date,
                     name_value,
                 )
                 await user.send(embed=embed)

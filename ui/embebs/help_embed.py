@@ -13,32 +13,32 @@ class HelpEmbed:
         commands = [
             (
                 "/checar_reserva [lab]",
-                "```Mostra as reservas para semana do laboratório escolhido (Windows ou Linux)```",
+                "`Mostra as reservas para semana do laboratório escolhido (Windows ou Linux)`",
             ),
             (
                 "/reservar [lab]",
-                "```Serve para os professores reservarem suas aulas preenchendo um forms/modal```",
+                "`Serve para os professores reservarem suas aulas preenchendo um forms/modal`",
             ),
             (
                 "/ppc",
-                "```Envia o link do projeto pedagógico de curso de graduação de Engenharia de Software do Campus Garanhuns```",
+                "`Envia o link do projeto pedagógico de curso de graduação de Engenharia de Software do Campus Garanhuns`",
             ),
             (
                 "/graficotempo [cidade]",
-                "```Retorna um gráfico com a progressão da temperatura, umidade e sensação térmica durante o dia```",
+                "`Retorna um gráfico com a progressão da temperatura, umidade e sensação térmica durante o dia`",
             ),
-            ("/d20", "```Rola um dado de 20 lados```"),
+            ("/d20", "`Rola um dado de 20 lados`"),
             (
                 "/tempo [cidade]",
-                "```Retorna algumas informações do clima da cidade escolhida```",
+                "`Retorna algumas informações do clima da cidade escolhida`",
             ),
             (
                 "/deletar [numero de mensagens]",
-                "```Para deletar mensagens quando o chat ficar muito poluído```",
+                "`Para deletar mensagens quando o chat ficar muito poluído`",
             ),
             (
                 "/oi",
-                "```Eu me apresento 😎```",
+                "`Eu me apresento 😎`",
             ),
         ]
 
