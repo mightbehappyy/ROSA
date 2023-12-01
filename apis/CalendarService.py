@@ -22,8 +22,16 @@ class CalendarService:
     def check_current_week_events(self, lab):
         now = datetime.datetime.utcnow()
 
-        start_of_week = now - timedelta(days=now.weekday())
-        end_of_week = start_of_week + timedelta(days=6)
+        if now.weekday() == 5:
+            start_of_week = now + timedelta(days=2)
+            end_of_week = start_of_week + timedelta(days=5)
+        elif now.weekday == 6:
+            start_of_week = now + timedelta(days=1)
+            end_of_week = start_of_week + timedelta(days=5)
+        else:
+            start_of_week = now - timedelta(days=now.weekday())
+            end_of_week = start_of_week + timedelta(days=5)
+
         events_result = (
             self.service.events()
             .list(

@@ -6,4 +6,5 @@ cogs_list = [
     "cogs.dices",
     "cogs.weather",
     "cogs.reservation",
+    "cogs.help",
 ]

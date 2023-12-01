@@ -1,7 +1,7 @@
 from discord.ext import commands
 import discord
 from discord import app_commands
-from modals.reservation_modal import ReservationModal
+from ui.modals.reservation_modal import ReservationModal
 from settings import GUILD_ID
 
 

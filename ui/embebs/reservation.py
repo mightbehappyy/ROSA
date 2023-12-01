@@ -1,5 +1,4 @@
 import discord
-from translate import Translator
 
 
 class ReservationEmbeds:

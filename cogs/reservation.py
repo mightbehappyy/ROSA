@@ -2,11 +2,11 @@ from discord.ext import commands
 import discord
 from settings import AUTHORIZED_ROLE_ID, GUILD_ID
 from discord import app_commands
-import apis.CalendarAPI as CalendarAPI
+import apis.CalendarController as CalendarAPI
 from utils import check_for_role
-from embebs.reservation import ReservationEmbeds
+from ui.embebs.reservation import ReservationEmbeds
 from discord.app_commands import Choice
-from modals.reservation_modal import ReservationModal
+from ui.modals.reservation_modal import ReservationModal
 
 
 class Reservations(commands.Cog):
