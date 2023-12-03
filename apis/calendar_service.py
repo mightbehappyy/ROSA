@@ -26,7 +26,39 @@ class CalendarService:
         if now.weekday() == 5:
             start_of_week = now + timedelta(days=2)
             end_of_week = start_of_week + timedelta(days=5)
-        elif now.weekday == 6:
+        elif now.weekday() == 6:
+            start_of_week = now + timedelta(days=1)
+            end_of_week = start_of_week + timedelta(days=5)
+        else:
+            start_of_week = now - timedelta(days=now.weekday())
+            end_of_week = start_of_week + timedelta(days=5)
+
+        events_result = (
+            self.service.events()
+            .list(
+                calendarId=LAB_WINDOWS_ID if lab == 1 else LAB_LINUX_ID,
+                timeMin=start_of_week.isoformat() + "Z",
+                timeMax=end_of_week.isoformat() + "Z",
+                singleEvents=True,
+                orderBy="startTime",
+            )
+            .execute()
+        )
+
+        events = events_result.get("items", [])
+
+        events_by_day = self.format_event_info(events)
+        return events_by_day
+
+    def check_future_weeks_schedule(self, lab, value):
+        now = (
+            datetime.datetime.utcnow() - timedelta(hours=3) + timedelta(days=7 * value)
+        )
+
+        if now.weekday() == 5:
+            start_of_week = now + timedelta(days=2)
+            end_of_week = start_of_week + timedelta(days=5)
+        elif now.weekday() == 6:
             start_of_week = now + timedelta(days=1)
             end_of_week = start_of_week + timedelta(days=5)
         else:

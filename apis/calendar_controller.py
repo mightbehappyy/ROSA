@@ -31,3 +31,10 @@ def get_day_event(date):
         return calendar_service.get_day_events(date)
     except HttpError as error:
         print(f"An error occurred: {error}")
+
+
+def get_future_weeks_schedule(lab: int, weeks):
+    try:
+        return calendar_service.check_future_weeks_schedule(lab, weeks)
+    except Exception as e:
+        print(f"An error occured on get_future_weeks_schedule {e}")

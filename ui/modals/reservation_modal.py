@@ -114,7 +114,7 @@ class ReservationModal(discord.ui.Modal, title="Reserva"):
     async def on_error(
         self, interaction: discord.Interaction, error: Exception
     ) -> None:
-        await interaction.response.send_message(
+        await interaction.followup.send(
             "Eita! alguma coisa deu errado.", ephemeral=True
         )
 

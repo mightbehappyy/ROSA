@@ -38,10 +38,10 @@ class ReservationEmbeds:
             first_day = list(first_day_list_converted.items())[0][0]
             final_day = list(final_day_list_converted.items())[0][0]
 
-            date_range = f"De {first_day} a {final_day}"
+            date_range = f"{first_day} a {final_day}"
             embed = discord.Embed(
                 title=f"Reservas do Laboratório {'Windows' if lab == 1 else 'Linux'}",
-                description=f"Horário da semana para as reservas dos laboratórios ({date_range})",
+                description=f"Horário da semana para as reservas dos laboratórios \n `{date_range}`",
                 color=0xF03A17,
             )
 
@@ -74,7 +74,7 @@ class ReservationEmbeds:
 
             embed = discord.Embed(
                 title="Infelizmente já existe existe uma reserva para esse horário :cry:",
-                description=f"Aqui estão as reservas para {first_day} tente reservar para outro horário se possível :smiley:",
+                description=f"Aqui estão as reservas para `{first_day}` tente reservar para outro horário se possível :smiley:",
                 color=0xF03A17,
             )
 
