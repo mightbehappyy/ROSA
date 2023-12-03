@@ -20,7 +20,7 @@ class CalendarService:
         )
 
     def check_current_week_events(self, lab):
-        now = datetime.datetime.utcnow()
+        now = datetime.datetime.utcnow() - timedelta(hours=3)
 
         if now.weekday() == 5:
             start_of_week = now + timedelta(days=2)
@@ -45,6 +45,7 @@ class CalendarService:
         )
 
         events = events_result.get("items", [])
+
         events_by_day = self.format_event_info(events)
         return events_by_day
 
