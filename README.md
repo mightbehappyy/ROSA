@@ -20,17 +20,17 @@ Apesar de seu propósito inicial, ROSA é um bot multiuso, e planejamos implemen
 
 ## Comandos
 
-| Comandos                                    | Descrição                                                                                              |
-| ------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| `/checar_reserva [lab]`                     | Mostra as reservas para semana do laboratório escolhido (Windows ou Linux)                             |
-| `/checar_reservas_furturas [lab] [semanas]` | Mostra as reservas para semana do laboratório escolhido (Windows ou Linux) em até 10 semanas           |
-| `/reservar [lab]`                           | Serve para os professores reservarem suas aulas preenchendo um forms/modal                             |
-| `/ppc`                                      | Envia o link do projeto pedagógico de curso de graduação de Engenharia de Software do Campus Garanhuns |
-| `/tempo [cidade]`                           | Retorna algumas informações do clima da cidade escolhida                                               |
-| `/graficotempo  [cidade]`                   | Retorna um gráfico com a progressão da temperatura, umidade e sensação termica durante o dia           |
-| `/d20`                                      | Rola um dado de 20 lados                                                                               |
-| `/deletar [numero de mensagens]`            | Para deletar mensagens quando o chat ficar muito poluído                                               |
-| `/oi`                                       | ROSA se apresenta 😎                                                                                   |
+| Comandos                                   | Descrição                                                                                              |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `/checar_reserva [lab]`                    | Mostra as reservas para semana do laboratório escolhido (Windows ou Linux)                             |
+| `/checar_reservas_futuras [lab] [semanas]` | Mostra as reservas para semana do laboratório escolhido (Windows ou Linux) em até 10 semanas           |
+| `/reservar [lab]`                          | Serve para os professores reservarem suas aulas preenchendo um forms/modal                             |
+| `/ppc`                                     | Envia o link do projeto pedagógico de curso de graduação de Engenharia de Software do Campus Garanhuns |
+| `/tempo [cidade]`                          | Retorna algumas informações do clima da cidade escolhida                                               |
+| `/graficotempo  [cidade]`                  | Retorna um gráfico com a progressão da temperatura, umidade e sensação termica durante o dia           |
+| `/d20`                                     | Rola um dado de 20 lados                                                                               |
+| `/deletar [numero de mensagens]`           | Para deletar mensagens quando o chat ficar muito poluído                                               |
+| `/oi`                                      | ROSA se apresenta 😎                                                                                   |
 
 ## Setup
 
