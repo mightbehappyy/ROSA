@@ -4,6 +4,10 @@ commands = [
         "`Mostra as reservas para semana do laboratório escolhido (Windows ou Linux)`",
     ),
     (
+        "/checar_reservas_futuras [lab] [semanas]",
+        "`Mostra as reservas para semana do laboratório escolhido (Windows ou Linux) em até 10 semanas`",
+    ),
+    (
         "/reservar [lab]",
         "`Serve para os professores reservarem suas aulas preenchendo um forms/modal`",
     ),
