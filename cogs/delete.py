@@ -2,7 +2,7 @@ from discord import app_commands
 from discord.ext import commands
 import discord
 from settings import AUTHORIZED_ROLE_ID, GUILD_ID
-from utils.role_auth import check_for_role
+from utils.functions.role_auth import check_for_role
 
 
 class Delete(commands.Cog):

@@ -3,7 +3,7 @@ import discord
 from settings import AUTHORIZED_ROLE_ID, GUILD_ID
 from discord import app_commands
 import apis.calendar_controller as CalendarAPI
-from utils.role_auth import check_for_role
+from utils.functions.role_auth import check_for_role
 from ui.embebs.reservation import ReservationEmbeds
 from discord.app_commands import Choice
 from ui.modals.reservation_modal import ReservationModal
