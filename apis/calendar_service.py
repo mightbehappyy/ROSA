@@ -3,11 +3,12 @@ from googleapiclient.discovery import build
 import datetime
 from datetime import timedelta
 from settings import LAB_LINUX_ID, LAB_WINDOWS_ID
+from auth.google_api_auth import get_creds
 
 
 class CalendarService:
-    def __init__(self, credentials, service_name="calendar", api_version="v3"):
-        self.credentials = credentials
+    def __init__(self, service_name="calendar", api_version="v3"):
+        self.credentials = get_creds()
         self.service_name = service_name
         self.api_version = api_version
         self.service = self.build_service()

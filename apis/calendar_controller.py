@@ -1,8 +1,8 @@
 from googleapiclient.errors import HttpError
-import apis.calendar_service as CalendarService
+from apis.calendar_service import CalendarService
 from auth.google_api_auth import get_creds
 
-calendar_service = CalendarService.CalendarService(get_creds())
+calendar_service = CalendarService()
 
 
 def check_calendar(lab: int):
