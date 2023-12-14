@@ -180,3 +180,6 @@ cython_debug/
 .vscode/
 
 *.db
+
+#api token
+api_token.json
