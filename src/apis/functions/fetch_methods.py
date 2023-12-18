@@ -14,7 +14,7 @@ class FetchMethods:
             return response.json()
         else:
             print(f"Request failed with status code: {response.status_code}")
-            return None
+            return response.status_code
 
     def post_request(self, endpoint: str, data: dict):
         token = self.token_operation.get_token(endpoint)
@@ -25,4 +25,4 @@ class FetchMethods:
         else:
             print(response.json().get("message"))
             print(f"Request failed with status code: {response.status_code}")
-            return None
+            return response.status_code

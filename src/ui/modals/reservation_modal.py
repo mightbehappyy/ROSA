@@ -1,10 +1,9 @@
 import discord
 import traceback
 from datetime import datetime
-from src.apis import post_event
 from src.ui.embebs.confirmation_embed import ConfirmationEmbed
-from src.ui.embebs.reservation import ReservationEmbeds
-from src.apis import get_day_event
+
+from src.apis.services.calendar_service import CalendarService
 
 
 class ReservationModal(discord.ui.Modal, title="Reserva"):
@@ -43,16 +42,16 @@ class ReservationModal(discord.ui.Modal, title="Reserva"):
     )
 
     async def on_submit(self, interaction: discord.Interaction):
-        embed_object = ConfirmationEmbed()
+        calendar_service = CalendarService(1)
         motivation_value = self.motivation.value
         name_value = self.name.value
         date_value = self.date.value
         start_time_value = self.start_time.value
         ending_time_value = self.ending_time.value
+
         try:
             date_obj = datetime.strptime(date_value, "%d-%m-%Y")
             formatted_date = date_obj.strftime("%Y-%m-%d")
-            embed_formatted_date = date_obj.strftime("%d-%m-%Y")
         except ValueError as e:
             await interaction.response.send_message(
                 "Formato de data inválido por favor use: Dia-Mês-Ano.", ephemeral=True
@@ -71,41 +70,37 @@ class ReservationModal(discord.ui.Modal, title="Reserva"):
             return
 
         try:
-            event = post_event(
-                motivation_value, start_time_value, ending_time_value, formatted_date
-            )
-
-            if event:
-                embed = ReservationEmbeds()
-                result_days_embed = embed.get_day_events_embed(
-                    get_day_event(formatted_date)
-                )
-
+            event = calendar_service.post_calendar_event(
+                motivation_value + "-" + name_value, start_time_value, ending_time_value, formatted_date)
+            if event == 409:
                 await interaction.response.send_message(
-                    ephemeral=True, embed=result_days_embed
+                    "Já existe uma reserva nesse horário :cry:",
+                    ephemeral=True,
+                )
+            elif event == 400:
+                await interaction.response.send_message(
+                    "O formato da data/hora é -> Hora:Minuto e Dia-Mês-Ano",
+                    ephemeral=True,
                 )
 
-                return
-            elif not event:
+            else:
                 user = await interaction.client.fetch_user(interaction.user.id)
                 await interaction.response.send_message(
                     f"<@{user.id}> Reserva enviada com sucesso! Veja a confirmação na sua DM :white_check_mark:"
                 )
+                embed_object = ConfirmationEmbed()
                 embed = embed_object.send_confirmation_embed(
-                    motivation_value,
-                    start_time_value,
-                    ending_time_value,
-                    embed_formatted_date,
+                    event["summary"],
+                    event["start"],
+                    event["end"],
+                    event["date"],
                     name_value,
                 )
+
                 await user.send(embed=embed)
-            else:
-                await interaction.response.send_message(
-                    "Ocorreu um erro ao enviar a reserva :cry:",
-                    ephemeral=True,
-                )
-                return
+
         except Exception as e:
+            print(e)
             await interaction.response.send_message(
                 "Ocorreu um erro ao enviar a reserva :cry:",
                 ephemeral=True,

@@ -19,3 +19,12 @@ class CalendarService:
             events_by_day[day].append(day_data)
 
         return events_by_day
+
+    def post_calendar_event(self, summary, start, end, date):
+        data = {
+            "summary": summary,
+            "start": start,
+            "end": end,
+            "date": date,
+        }
+        return self.events.post_event(data)
