@@ -4,6 +4,7 @@ from datetime import datetime
 from src.ui.embebs.confirmation_embed import ConfirmationEmbed
 
 from src.apis.services.calendar_service import CalendarService
+from src.utils.functions.date_time_validation import validate_date_time_format
 
 
 class ReservationModal(discord.ui.Modal, title="Reserva"):
@@ -48,26 +49,16 @@ class ReservationModal(discord.ui.Modal, title="Reserva"):
         date_value = self.date.value
         start_time_value = self.start_time.value
         ending_time_value = self.ending_time.value
+        date_obj = datetime.strptime(date_value, "%d-%m-%Y")
+        formatted_date = date_obj.strftime("%Y-%m-%d")
 
-        try:
-            date_obj = datetime.strptime(date_value, "%d-%m-%Y")
-            formatted_date = date_obj.strftime("%Y-%m-%d")
-        except ValueError as e:
+        validation_result = await validate_date_time_format(date_value, start_time_value, ending_time_value)
+
+        if validation_result != "formato válido":
             await interaction.response.send_message(
-                "Formato de data inválido por favor use: Dia-Mês-Ano.", ephemeral=True
+                f"Formato inválido da {validation_result}",
+                ephemeral=True,
             )
-            print(e)
-
-        try:
-            datetime.strptime(start_time_value, "%H:%M")
-            datetime.strptime(ending_time_value, "%H:%M")
-        except ValueError as e:
-            await interaction.response.send_message(
-                "Formato de hora inválido por favor use: Hora:Minuto.", ephemeral=True
-            )
-
-            print(e)
-            return
 
         try:
             event = calendar_service.post_calendar_event(
