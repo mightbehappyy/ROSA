@@ -1,8 +1,8 @@
 from discord import app_commands
 from discord.ext import commands
 import discord
-from settings import GUILD_ID
-from ui.embebs.help_embed import HelpEmbed
+from src.utils.lists.settings import GUILD_ID
+from src.ui.embebs.help_embed import HelpEmbed
 
 
 class Help(commands.Cog):
@@ -18,6 +18,7 @@ class Help(commands.Cog):
         name="ajuda", description="Retorna a lista de comandos da rosa"
     )
     async def help(self, interaction: discord.Interaction):
+
         await interaction.response.send_message(
             ephemeral=True, embed=HelpEmbed.create_help_embed()
         )

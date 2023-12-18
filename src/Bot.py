@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
-from settings import GUILD_ID, APPLICATION_ID, BOT_TOKEN
-from coglist import cogs_list
+from src.utils.lists.settings import GUILD_ID, APPLICATION_ID, BOT_TOKEN
+from src.utils.lists.coglist import cogs_list
 
 # The guild in which this slash command will be registered.
 # It is recommended to have a test guild to separate from your "production" bot

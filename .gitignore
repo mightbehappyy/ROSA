@@ -9,11 +9,11 @@ venv/
 
 # Ignore compiled Python files
 __pycache__/
-
+src/setup.py
 # Ignore IDE-specific files
 .vscode/
 .idea/
-
+__init__.py
 # Ignore log files
 *.log
 # Byte-compiled / optimized / DLL files
@@ -141,7 +141,6 @@ celerybeat.pid
 .env
 .venv
 env/
-venv/
 ENV/
 env.bak/
 venv.bak/
@@ -176,8 +175,6 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
-
-.vscode/
 
 *.db
 

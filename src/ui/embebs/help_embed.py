@@ -1,5 +1,5 @@
 import discord
-from utils.lists.commands import commands
+from src.utils.lists.commands import commands
 
 
 class HelpEmbed:

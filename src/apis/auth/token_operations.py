@@ -5,7 +5,8 @@ import json
 auth_endpoint = "http://localhost:8080/api/auth/token"
 api_token_file = "api_token.json"
 
-class TokenOperations():
+
+class TokenOperations:
     def __init__(self):
         self.password = os.getenv("PASSWORD")
         self.username = os.getenv("USER_NAME")

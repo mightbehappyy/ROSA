@@ -3,7 +3,6 @@ cogs_list = [
     "cogs.delete",
     "cogs.swearing_sensor",
     "cogs.dices",
-    "cogs.weather",
-    "cogs.reservation",
     "cogs.help",
+    "cogs.reservation"
 ]

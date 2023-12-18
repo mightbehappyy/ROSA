@@ -2,7 +2,7 @@ from discord.ext import commands
 import discord
 from discord import app_commands
 from random import randint
-from settings import GUILD_ID
+from src.utils.lists.settings import GUILD_ID
 
 
 class Dices(commands.Cog):

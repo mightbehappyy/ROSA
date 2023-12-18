@@ -1,10 +1,10 @@
 import discord
 import traceback
 from datetime import datetime
-from apis.calendar_controller import post_event
-from ui.embebs.confirmation_embed import ConfirmationEmbed
-from ui.embebs.reservation import ReservationEmbeds
-from apis.calendar_controller import get_day_event
+from src.apis import post_event
+from src.ui.embebs.confirmation_embed import ConfirmationEmbed
+from src.ui.embebs.reservation import ReservationEmbeds
+from src.apis import get_day_event
 
 
 class ReservationModal(discord.ui.Modal, title="Reserva"):
@@ -75,7 +75,7 @@ class ReservationModal(discord.ui.Modal, title="Reserva"):
                 motivation_value, start_time_value, ending_time_value, formatted_date
             )
 
-            if event == True:
+            if event:
                 embed = ReservationEmbeds()
                 result_days_embed = embed.get_day_events_embed(
                     get_day_event(formatted_date)
@@ -86,7 +86,7 @@ class ReservationModal(discord.ui.Modal, title="Reserva"):
                 )
 
                 return
-            elif event == False:
+            elif not event:
                 user = await interaction.client.fetch_user(interaction.user.id)
                 await interaction.response.send_message(
                     f"<@{user.id}> Reserva enviada com sucesso! Veja a confirmação na sua DM :white_check_mark:"
@@ -112,7 +112,7 @@ class ReservationModal(discord.ui.Modal, title="Reserva"):
             )
 
     async def on_error(
-        self, interaction: discord.Interaction, error: Exception
+            self, interaction: discord.Interaction, error: Exception
     ) -> None:
         await interaction.followup.send(
             "Eita! alguma coisa deu errado.", ephemeral=True

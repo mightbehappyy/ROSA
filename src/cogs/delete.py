@@ -1,8 +1,8 @@
 from discord import app_commands
 from discord.ext import commands
 import discord
-from settings import AUTHORIZED_ROLE_ID, GUILD_ID
-from utils.functions.role_auth import check_for_role
+from src.utils.lists.settings import AUTHORIZED_ROLE_ID, GUILD_ID
+from src.utils.functions.role_auth import check_for_role
 
 
 class Delete(commands.Cog):
@@ -15,8 +15,8 @@ class Delete(commands.Cog):
 
     @app_commands.guild_only()
     @app_commands.command(name="deletar", description="Esse comando deleta mensagens")
-    async def deletar(self, interaction: discord.Interaction, number: int):
-        if check_for_role(interaction, AUTHORIZED_ROLE_ID) == True:
+    async def delete(self, interaction: discord.Interaction, number: int):
+        if check_for_role(interaction, AUTHORIZED_ROLE_ID):
             if number > 100 or number < 1:
                 await interaction.response.send_message(
                     "Só é possível deletar entre 1 e 100 mensagens"

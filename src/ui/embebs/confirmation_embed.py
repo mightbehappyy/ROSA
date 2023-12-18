@@ -2,6 +2,7 @@ import discord
 
 
 class ConfirmationEmbed:
+
     def send_confirmation_embed(self, motivation, start, end, date, name):
         embed = discord.Embed(
             title="Confirmação de reserva :white_check_mark:", color=0xFFFFFF

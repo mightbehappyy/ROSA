@@ -1,6 +1,6 @@
 from discord.ext import commands
 import discord
-from settings import GUILD_ID
+from src.utils.lists.settings import GUILD_ID
 
 
 class SwearingSensor(commands.Cog):
