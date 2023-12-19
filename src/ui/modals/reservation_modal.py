@@ -5,7 +5,7 @@ from src.ui.embebs.confirmation_embed import ConfirmationEmbed
 
 from src.apis.services.calendar_service import CalendarService
 from src.utils.functions.date_time_validation import validate_date_time_format
-
+from src.ui.embebs.day_events_embed import DayEventsEmbed
 
 class ReservationModal(discord.ui.Modal, title="Reserva"):
     motivation = discord.ui.TextInput(
@@ -64,10 +64,12 @@ class ReservationModal(discord.ui.Modal, title="Reserva"):
             event = calendar_service.post_calendar_event(
                 motivation_value + "-" + name_value, start_time_value, ending_time_value, formatted_date)
             if event == 409:
-                await interaction.response.send_message(
-                    "Já existe uma reserva nesse horário :cry:",
-                    ephemeral=True,
-                )
+                user = await interaction.client.fetch_user(interaction.user.id)
+
+                day_events_embed = DayEventsEmbed(1)
+                embed = day_events_embed.get_week_events_embed(date_value)
+                await interaction.response.send_message(embed=embed, ephemeral=True, )
+
             elif event == 400:
                 await interaction.response.send_message(
                     "O formato da data/hora é -> Hora:Minuto e Dia-Mês-Ano",
@@ -91,7 +93,7 @@ class ReservationModal(discord.ui.Modal, title="Reserva"):
                 await user.send(embed=embed)
 
         except Exception as e:
-            print(e)
+            print("erro tal:", e)
             await interaction.response.send_message(
                 "Ocorreu um erro ao enviar a reserva :cry:",
                 ephemeral=True,

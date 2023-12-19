@@ -21,6 +21,17 @@ class CalendarService:
 
         return events_by_day
 
+    def get_todays_events(self, date):
+        events = self.events.get_day_events(date)['weekEvents']
+        events_by_day = {}
+        for day_data in events:
+            day = day_data["dayOfWeek"]
+            if day not in events_by_day:
+                events_by_day[day] = []
+            events_by_day[day].append(day_data)
+
+        return events_by_day
+
     def post_calendar_event(self, summary, start, end, date):
         data = {
             "summary": summary,

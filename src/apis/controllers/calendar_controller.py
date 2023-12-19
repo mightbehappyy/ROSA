@@ -12,3 +12,6 @@ class CalendarController:
 
     def post_event(self, data: dict):
         return self.fetch.post_request(self.endpoint + "criar-evento", data)
+
+    def get_day_events(self, date):
+        return self.fetch.get_request_with_body(self.endpoint + "eventos-do-dia/" + "1", date)
