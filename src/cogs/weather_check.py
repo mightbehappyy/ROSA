@@ -24,6 +24,15 @@ class WeatherCheck(commands.Cog):
         await interaction.response.defer()
         await interaction.followup.send(ephemeral=True, embed=weather_stats_embed.get_weather_stats_embeb())
 
+    @app_commands.guild_only()
+    @app_commands.command(
+        name="tempo_grafico", description="Retorna os dados um grafico do tempo ao longo do dia"
+    )
+    async def get_weather_graph(self, interaction: discord.Interaction, city: str):
+        weather_stats_embed = WeatherEmbeds(city)
+        await interaction.response.defer()
+        await interaction.followup.send(ephemeral=True, embed=weather_stats_embed.get_graph_embed())
+
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(WeatherCheck(bot), guilds=[discord.Object(GUILD_ID)])

@@ -8,11 +8,13 @@ class WeatherEmbeds:
     def __init__(self, city):
         self.weather_service = WeatherService(city)
 
-    def get_graph_embed(self, city_name, region_name, image_url):
+    def get_graph_embed(self):
+        weather_graph = self.weather_service.get_weather_graph()
         embed = discord.Embed(
-            title=f"Tempo em {city_name} - {region_name}", color=0xFFFFFF
+            title=f"Tempo em {weather_graph['name']} - {weather_graph['region']} ({weather_graph['country']})", color=0xFFFFFF
         )
-        embed.set_image(url=image_url)
+
+        embed.set_image(url=weather_graph['url'])
         return embed
 
     def get_weather_stats_embeb(self):
