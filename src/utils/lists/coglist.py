@@ -4,5 +4,6 @@ cogs_list = [
     "cogs.swearing_sensor",
     "cogs.dices",
     "cogs.help",
-    "cogs.reservation"
+    "cogs.reservation",
+    "cogs.weather_check"
 ]

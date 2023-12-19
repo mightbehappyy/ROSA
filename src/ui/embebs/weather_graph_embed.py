@@ -1,7 +1,13 @@
 import discord
+from src.apis.services.weather_service import WeatherService
+from src.utils.lists.weather_stats_dict import get_weather_stats_dict
 
 
 class WeatherEmbeds:
+
+    def __init__(self, city):
+        self.weather_service = WeatherService(city)
+
     def get_graph_embed(self, city_name, region_name, image_url):
         embed = discord.Embed(
             title=f"Tempo em {city_name} - {region_name}", color=0xFFFFFF
@@ -9,41 +15,16 @@ class WeatherEmbeds:
         embed.set_image(url=image_url)
         return embed
 
-    def get_weather_stats_embeb(self, info):
+    def get_weather_stats_embeb(self):
+        info = self.weather_service.get_weather_stats()
+        field_dict = get_weather_stats_dict(info)
         embed = discord.Embed(
-            title=f"Tempo em {info['city_name']}",
+            title=f"Tempo em {info['name']}, {info['region']} ({info['country']})",
             url="https://portal.inmet.gov.br/",
             color=0xFFFFFF,
         )
 
         embed.set_thumbnail(url=f"https:{info['icon']}")
-
-        field_dict = {
-            "temperature": [
-                ":thermometer: Temperatura",
-                f"{info['temperature_celsius']}°C",
-            ],
-            "humidity": [
-                ":droplet: Umidade",
-                f"{info['humidity']} %",
-            ],
-            "cloud": [
-                ":cloud: Cobertura",
-                f"{info['cloud']} %",
-            ],
-            "wind": [
-                ":dash: Velocidade do vento",
-                f"{info['wind_kph']}km/h",
-            ],
-            "feels_like": [
-                ":person_getting_massage: Sensação termica",
-                f"{info['feels_like']}°C",
-            ],
-            "time": [
-                ":alarm_clock: Horário",
-                f"{info['time']}",
-            ],
-        }
 
         for field in field_dict:
             embed.add_field(

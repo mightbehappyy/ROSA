@@ -3,8 +3,6 @@ from discord.app_commands import Choice
 from discord.ext import commands
 import discord
 from src.utils.lists.settings import GUILD_ID
-from src.ui.embebs.help_embed import HelpEmbed
-from src.apis.controllers.calendar_controller import CalendarController
 from src.ui.embebs.week_events_embed import WeekEventsEmbed
 
 
