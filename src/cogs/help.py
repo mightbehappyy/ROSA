@@ -4,7 +4,8 @@ import discord
 from src.utils.lists.settings import GUILD_ID
 from src.ui.embebs.help_embed import HelpEmbed
 from src.ui.modals.reservation_modal import ReservationModal
-
+import src.utils.functions.role_auth as role_auth
+import src.utils.lists.settings as settings
 class Help(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
@@ -18,15 +19,21 @@ class Help(commands.Cog):
         name="ajuda", description="Retorna a lista de comandos da rosa"
     )
     async def help(self, interaction: discord.Interaction):
+            await interaction.response.send_message(
+                ephemeral=True, embed=HelpEmbed.create_help_embed()
+            )
 
-        await interaction.response.send_message(
-            ephemeral=True, embed=HelpEmbed.create_help_embed()
-        )
 
     @app_commands.command(
             name="reservar", description="Retorna a lista de comandos da rosa")
     async def test(self, interaction: discord.Interaction):
-        await interaction.response.send_modal(ReservationModal())
+        print(role_auth.check_for_role(interaction, settings.AUTHORIZED_ROLE_ID))
+        if role_auth.check_for_role(interaction, settings.AUTHORIZED_ROLE_ID):
+            await interaction.response.send_modal(ReservationModal())
+        else:
+            await interaction.response.send_message("Você não tem autorização para utilizar esse comando", ephemeral=True)
+
+
 
 
 async def setup(bot: commands.Bot):
