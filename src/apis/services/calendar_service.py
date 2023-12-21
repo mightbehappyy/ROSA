@@ -6,7 +6,6 @@ class CalendarService:
         self.events = CalendarController(lab)
 
     def get_calendar_week_range(self):
-
         week_range = self.events.get_events()['weekRange']
         return week_range.replace(' ', ' a ')
 

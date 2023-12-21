@@ -2,7 +2,7 @@ import requests
 import os
 import json
 
-auth_endpoint = "http://localhost:8080/api/auth/token"
+auth_endpoint = "https://rosa-api-4d498332e4b1.herokuapp.com/api/auth/token"
 api_token_file = "api_token.json"
 
 

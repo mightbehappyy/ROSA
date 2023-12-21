@@ -1,12 +1,12 @@
-def translate_day(day):
+def translate(day):
     dict_days = {
-        "seg.": "Segunda-feira",
-        "ter.": "Terça-feira",
-        "qua.": "Quarta-feira",
-        "qui.": "Quinta-feira",
-        "sex.": "Sexta-feira",
-        "sab.": "Sábado",
-        "dom.": "Domingo",
+        "Mon": "Segunda-feira",
+        "Tue": "Terça-feira",
+        "Wed": "Quarta-feira",
+        "Thu": "Quinta-feira",
+        "Fri": "Sexta-feira",
+        "Sat": "Sábado",
+        "Sun": "Domingo",
     }
     for key, value in dict_days.items():
         if key == day:

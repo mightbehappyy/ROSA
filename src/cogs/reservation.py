@@ -25,10 +25,8 @@ class Reservation(commands.Cog):
         ]
     )
     async def check_reservation(self, interaction: discord.Interaction, lab: discord.app_commands.Choice[str]):
-        await interaction.response.defer()
-        await interaction.followup.send(
-            ephemeral=True, embed=WeekEventsEmbed(lab.value).get_week_events_embed()
-        )
+        await interaction.response.send_message(f"Já te mando as reservas do {lab.name} :smile:", ephemeral=True)
+        await interaction.followup.send(embed=WeekEventsEmbed(lab.value, lab.name).get_week_events_embed(), ephemeral=True)
 
 
 async def setup(bot: commands.Bot):

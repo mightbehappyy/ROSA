@@ -68,7 +68,7 @@ class ReservationModal(discord.ui.Modal, title="Reserva"):
 
                 day_events_embed = DayEventsEmbed(1)
                 embed = day_events_embed.get_week_events_embed(date_value)
-                await interaction.response.send_message(embed=embed, ephemeral=True, )
+                await interaction.response.send_message(embed=embed, ephemeral=True)
 
             elif event == 400:
                 await interaction.response.send_message(
@@ -82,6 +82,7 @@ class ReservationModal(discord.ui.Modal, title="Reserva"):
                     f"<@{user.id}> Reserva enviada com sucesso! Veja a confirmação na sua DM :white_check_mark:"
                 )
                 embed_object = ConfirmationEmbed()
+                print(event)
                 embed = embed_object.send_confirmation_embed(
                     event["summary"],
                     event["start"],

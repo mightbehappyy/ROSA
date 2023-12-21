@@ -1,20 +1,20 @@
 import discord
 
 from src.apis.services.calendar_service import CalendarService
-from src.utils.functions.translate_day import translate_day
+from src.utils.functions.translate_day import translate
 
 
 class WeekEventsEmbed:
-    def __init__(self, lab):
+    def __init__(self, lab, lab_name):
         self.calendar_service = CalendarService(lab)
         self.lab = lab
+        self.lab_name = lab_name
 
     def get_week_events_embed(self):
         date_range = self.calendar_service.get_calendar_week_range()
         events_by_day = self.calendar_service.get_calendar_events()
-
         embed = discord.Embed(
-            title="Reservas do Laboratório Windows",
+            title=f"Reservas do Laboratório {self.lab_name}",
             description=f"Horário da semana para as reservas dos laboratórios \n `{date_range}`",
             color=0xF03A17,
         )
@@ -26,7 +26,7 @@ class WeekEventsEmbed:
             )
 
             embed.add_field(
-                name=f"{translate_day(day)}",
+                name=f"{translate(day)}",
                 value=f"```{day_events}```",
                 inline=False,
             )

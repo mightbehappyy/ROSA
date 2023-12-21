@@ -1,7 +1,7 @@
 import discord
 from src.apis.services.weather_service import WeatherService
 from src.utils.lists.weather_stats_dict import get_weather_stats_dict
-
+from src.utils.functions.translate_day import translate
 
 class WeatherEmbeds:
 

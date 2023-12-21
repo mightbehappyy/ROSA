@@ -1,7 +1,7 @@
 import discord
 
 from src.apis.services.calendar_service import CalendarService
-from src.utils.functions.translate_day import translate_day
+from src.utils.functions.translate_day import translate
 
 
 
@@ -26,7 +26,7 @@ class DayEventsEmbed:
             )
 
             embed.add_field(
-                name=f"{translate_day(day)}",
+                name=f"{translate(day)}",
                 value=f"```{day_events}```",
                 inline=False,
             )
